@@ -1,8 +1,13 @@
 const express = require('express');
 const app = express();
+const bodyParser = require('body-parser');
+const moment = require('moment');
+
+// View Engine
+app.set('view engine', 'ejs');
 
 // Static
-app.set('view engine', 'ejs');
+express.use(express.static('public'));
 
 // Routes
 app.get('/', (req, res) => {
