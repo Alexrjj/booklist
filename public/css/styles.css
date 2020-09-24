@@ -8,3 +8,13 @@ body {
 .container {
     max-width: 50%;
 }
+
+.fabutton {
+    background: none;
+    padding: 0;
+    border: none;
+}
+
+.fabutton:focus {
+    outline: none;
+}

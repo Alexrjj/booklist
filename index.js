@@ -23,7 +23,7 @@ app.set('view engine', 'ejs');
 // Static
 app.use(express.static('public'));
 
-// Routes
+// Index Route - List books
 app.get('/', (req, res) => {
     Book.findAll().then(books => {
         res.render('index', {title: 'BookList - Main', books: books});
@@ -31,6 +31,7 @@ app.get('/', (req, res) => {
 
 });
 
+// Save book
 app.post('/save', (req, res) => {
     let title = req.body.title;
     let author = req.body.author;
@@ -51,6 +52,27 @@ app.post('/save', (req, res) => {
         alert('Verifique os campos!');
         res.redirect('/');
     }
+});
+
+// Delete book
+app.post('/delete', (req, res) => {
+   let id = req.body.id;
+
+   if (id !== undefined) {
+       if (!isNaN(id)) {
+           Book.destroy({
+               where: {
+                   id: id
+               }
+           }).then(() => {
+               res.redirect('/');
+           });
+       } else {
+           res.redirect('/');
+       }
+   } else {
+       res.redirect('/');
+   }
 });
 
 // Server
