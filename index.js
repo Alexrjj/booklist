@@ -25,7 +25,10 @@ app.use(express.static('public'));
 
 // Routes
 app.get('/', (req, res) => {
-    res.render('index', {title: 'BookList - Main'});
+    Book.findAll().then(books => {
+        res.render('index', {title: 'BookList - Main', books: books});
+    })
+
 });
 
 app.post('/save', (req, res) => {
@@ -40,7 +43,7 @@ app.post('/save', (req, res) => {
             author: author,
             isbn: isbn,
             regdate: date,
-            slug: slugify(name, { lower: true }),
+            slug: slugify(title, { lower: true }),
         }).then(() => {
             res.redirect('/');
         });

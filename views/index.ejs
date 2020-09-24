@@ -10,7 +10,7 @@
         </h1>
         <br>
         <hr>
-        <form action="">
+        <form method="POST" action="/save">
             <div class="form-group">
                 <label for="title">Título</label>
                 <input class="form-control" type="text" name="title">
@@ -24,7 +24,7 @@
                 <input type="text" class="form-control" name="isbn">
             </div>
 
-            <input type="button" class="form-control btn btn-primary" name="submit" value="Adicionar">
+            <button class="form-control btn btn-primary" name="submit">Adicionar</button>
         </form>
 
         <br>
@@ -36,24 +36,17 @@
                 <th>ISBN</th>
                 <th>Ações</th>
             </tr>
-            <tr>
-                <td>Book One</td>
-                <td>Jane Doe</td>
-                <td>45645654</td>
-                <td>
-                    <h5 class="fa-fw far fa-edit text-primary"></h5>
-                    <h5 class="fa-fw far fa-trash-alt text-danger"></h5>
-                </td>
-            </tr>
-            <tr>
-                <td>Book Two</td>
-                <td>James Brother's</td>
-                <td>97654305</td>
-                <td>
-                    <h5 class="fa-fw far fa-edit text-primary"></h5>
-                    <h5 class="fa-fw far fa-trash-alt text-danger"></h5>
-                </td>
-            </tr>
+            <% books.forEach((book) => { %>
+                <tr>
+                    <td><%= book.title %></td>
+                    <td><%= book.author %></td>
+                    <td><%= book.isbn %></td>
+                    <td>
+                        <h5 class="fa-fw far fa-edit text-primary"></h5>
+                        <h5 class="fa-fw far fa-trash-alt text-danger"></h5>
+                    </td>
+                </tr>
+            <% }); %>
         </table>
     </div>
 </body>

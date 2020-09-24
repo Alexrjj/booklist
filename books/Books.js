@@ -2,7 +2,7 @@ const Sequelize = require('sequelize');
 const connection = require('../database/connection');
 
 const Book = connection.define('booklist', {
-    name: {
+    title: {
         type: Sequelize.STRING,
         allowNull: false
     },
