@@ -75,6 +75,26 @@ app.post('/delete', (req, res) => {
    }
 });
 
+// Edit book
+app.get('/edit/:id', (req, res) => {
+    let id = req.params.id;
+    if (!isNaN(id)) {
+        res.redirect('/');
+    }
+
+    Book.findByPk(id).then(book => {
+        if (id !== undefined) {
+            Book.findAll({ where: { id: id }} ).then(() => { res.render('edit', { book: book })});
+        } else {
+            res.redirect('/');
+        }
+    }).catch((err) => {
+        console.log(err);
+        res.redirect('/');
+    });
+});
+
+
 // Server
 app.listen(3000, () => {
     console.log('Server on.');
