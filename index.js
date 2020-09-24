@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const moment = require('moment');
 const connection = require('./database/connection');
 const Book = require('./books/Books');
+const slugify = require('slugify');
 
 // DB Connection
 connection.authenticate().then(() => {
@@ -31,8 +32,22 @@ app.post('/save', (req, res) => {
     let title = req.body.title;
     let author = req.body.author;
     let isbn = req.body.isbn;
+    let date = new Date();
 
-
+    if(title !== undefined) {
+        Book.create({
+            title: title,
+            author: author,
+            isbn: isbn,
+            regdate: date,
+            slug: slugify(name, { lower: true }),
+        }).then(() => {
+            res.redirect('/');
+        });
+    } else {
+        alert('Verifique os campos!');
+        res.redirect('/');
+    }
 });
 
 // Server
