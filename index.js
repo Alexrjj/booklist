@@ -3,6 +3,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const moment = require('moment');
 const connection = require('./database/connection');
+const Book = require('./books/Books');
 
 // DB Connection
 connection.authenticate().then(() => {
@@ -24,7 +25,15 @@ app.use(express.static('public'));
 // Routes
 app.get('/', (req, res) => {
     res.render('index', {title: 'BookList - Main'});
-})
+});
+
+app.post('/save', (req, res) => {
+    let title = req.body.title;
+    let author = req.body.author;
+    let isbn = req.body.isbn;
+
+
+});
 
 // Server
 app.listen(3000, () => {
