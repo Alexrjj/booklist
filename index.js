@@ -78,18 +78,39 @@ app.post('/delete', (req, res) => {
 // Edit book
 app.get('/edit/:id', (req, res) => {
     let id = req.params.id;
-    if (!isNaN(id)) {
+
+    if (isNaN(id)) {
         res.redirect('/');
     }
 
     Book.findByPk(id).then(book => {
-        if (id !== undefined) {
-            Book.findAll({ where: { id: id }} ).then(() => { res.render('edit', { book: book })});
+        if (book !== undefined) {
+            res.render('edit', { title: 'BookList - Atualizar', book: book });
         } else {
             res.redirect('/');
         }
     }).catch((err) => {
         console.log(err);
+        res.redirect('/');
+    });
+});
+
+// Update book
+app.post('/update', (req,res) => {
+    let id = req.body.id;
+    let title = req.body.title;
+    let author = req.body.author;
+    let isbn = req.body.isbn;
+
+    Book.update({
+        title: title,
+        author: author,
+        isbn: isbn,
+        slug: slugify(title, { lower: true })},{
+        where: {
+            id: id
+        }
+    }).then(() => {
         res.redirect('/');
     });
 });

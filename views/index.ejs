@@ -1,15 +1,7 @@
 <%- include('partials/header') %>
-<%- include('partials/navbar') %>
 <body>
 <div class="container mt-4">
-    <h1 class="display-4 text-center">
-        <i class="fas fa-book-open text-primary"></i>
-        My
-        <span class="text-primary">Book</span>
-        List
-    </h1>
-    <br>
-    <hr>
+    <%- include('partials/navbar') %>
     <form method="POST" action="/save">
         <div class="form-group">
             <label for="title">Título</label>
@@ -44,10 +36,9 @@
                     <td><%= book.author %></td>
                     <td><%= book.isbn %></td>
                     <td>
-                        <h5 class="fa-fw far fa-edit text-primary"></h5>
-
+                        <a href="/edit/<%= book.id %>"><h5 class="fa-fw far fa-edit text-primary"></h5></a>
                         <button class="fabutton" type="submit"><h5 class="fa-fw far fa-trash-alt text-danger"></h5>
-                        <a href=""></a>
+                        </button>
                     </td>
                 </tr>
             </form>
