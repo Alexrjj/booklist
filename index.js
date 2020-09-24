@@ -15,7 +15,7 @@ app.use(express.static('public'));
 
 // Routes
 app.get('/', (req, res) => {
-    res.render('index', {title: 'Book List - Main'});
+    res.render('index', {title: 'BookList - Main'});
 })
 
 // Server
